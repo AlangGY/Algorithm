@@ -31,40 +31,26 @@ const getAreasCount = (floodLevel, regionsMatrix, matrixSize) => {
       const [x, y] = dfsStack.pop();
       if (regionsMatrix[y][x] > floodLevel) {
         visited[y][x] = true;
-        getPossibleRoutes(
-          floodLevel,
-          [x, y],
-          visited,
-          regionsMatrix,
-          matrixSize
-        ).forEach(([newX, newY]) => dfsStack.push([newX, newY]));
+        const newLocation = [
+          [x + 1, y],
+          [x - 1, y],
+          [x, y + 1],
+          [x, y - 1],
+        ];
+        const canPass = ([x, y]) =>
+          0 <= x &&
+          x < matrixSize &&
+          0 <= y &&
+          y < matrixSize &&
+          regionsMatrix[y][x] > floodLevel &&
+          !visited[y][x];
+
+        newLocation
+          .filter(canPass)
+          .forEach(([newX, newY]) => dfsStack.push([newX, newY]));
       }
     }
   }
-};
-
-const getPossibleRoutes = (
-  floodLevel,
-  [positionX, positionY],
-  visited,
-  regionsMatrix,
-  matrixSize
-) => {
-  const direction = [
-    [positionX + 1, positionY],
-    [positionX - 1, positionY],
-    [positionX, positionY + 1],
-    [positionX, positionY - 1],
-  ];
-  return direction.filter(
-    ([x, y]) =>
-      0 <= x &&
-      x < matrixSize &&
-      0 <= y &&
-      y < matrixSize &&
-      regionsMatrix[y][x] > floodLevel &&
-      !visited[y][x]
-  );
 };
 
 const solution = (matrixSize, regionsMatrix) => {
