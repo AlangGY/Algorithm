@@ -10,18 +10,17 @@ const solution = (buildings) => {
   let totalCount = 0;
 
   for (const currentBuilding of buildings) {
-    if (!stack.length || stack[stack.length - 2] > currentBuilding) {
-      _pushBuilding(stack, currentBuilding);
-      continue;
-    }
     while (stack.length && stack[stack.length - 2] <= currentBuilding) {
       totalCount += _popBuilding(stack);
+      console.log(stack);
     }
     _pushBuilding(stack, currentBuilding);
+    console.log(stack);
   }
 
   while (stack.length) {
     totalCount += _popBuilding(stack);
+    console.log(stack);
   }
 
   return totalCount;
