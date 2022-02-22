@@ -1,17 +1,16 @@
-const [buildingCount, ...buildings] = require("fs")
+const [_, ...buildings] = require("fs")
   .readFileSync("example.txt")
   .toString()
   .trim()
   .split("\n")
   .map(Number);
 
-const solution = (buildings, buildingCount) => {
-  const stack = [buildings[0], 0];
+const solution = (buildings) => {
+  const stack = [];
   let totalCount = 0;
 
-  for (let i = 1; i < buildingCount; i++) {
-    const currentBuilding = buildings[i];
-    if (stack[stack.length - 2] > currentBuilding) {
+  for (const currentBuilding of buildings) {
+    if (!stack.length || stack[stack.length - 2] > currentBuilding) {
       _pushBuilding(stack, currentBuilding);
       continue;
     }
@@ -42,4 +41,4 @@ const solution = (buildings, buildingCount) => {
   }
 };
 
-console.log(solution(buildings, buildingCount));
+console.log(solution(buildings));
