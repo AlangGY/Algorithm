@@ -1,3 +1,8 @@
+/*
+백준 1662번 압축
+https://www.acmicpc.net/problem/1662
+*/
+
 const input = require("fs").readFileSync("example.txt").toString().trim();
 
 const solution = (string) => {
