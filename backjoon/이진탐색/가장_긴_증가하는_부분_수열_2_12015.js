@@ -1,5 +1,10 @@
+/*
+백준 12015 가장 긴 증가하는 부분수열2
+https://www.acmicpc.net/problem/12015
+*/
+
 const [NStr, AStr] = require("fs")
-  .readFileSync("example.txt")
+  .readFileSync("/dev/stdin")
   .toString()
   .trim()
   .split("\n");
