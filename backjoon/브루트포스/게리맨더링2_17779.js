@@ -13,13 +13,11 @@ let [[N], ...A] = require("fs")
 const solution = (N, A) => {
   A = A.map((row) => [-1, ...row]);
   A.splice(0, 0, new Array(N + 1).fill(-1));
-  // console.log(A);
   let minDifference = Infinity;
   for (let d1 = 1; d1 <= N; d1++) {
     for (let d2 = 1; d2 <= N; d2++) {
       for (let x = 1; x <= N - d1 - d2; x++) {
         for (let y = 1 + d1; y <= N - d2; y++) {
-          // if (x + d1 + d2 > N)
           const peopleCount = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0 };
           for (let r = 1; r <= N; r++) {
             for (let c = 1; c <= N; c++) {
@@ -28,7 +26,6 @@ const solution = (N, A) => {
             }
           }
           const values = Object.values(peopleCount).sort((a, b) => a - b);
-          // console.log(values);
           minDifference = Math.min(
             minDifference,
             values[values.length - 1] - values[0]
